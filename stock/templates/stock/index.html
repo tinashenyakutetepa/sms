@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+    <script src='main.js'></script>
+</head>
+
+<body>
+<style>
+table, th, td {
+  border: 1px solid black;
+}
+.btn{
+    color:red
+}
+.btn-update{
+    color:blue;
+}
+</style>
+
+<h1>{{title}} </h1>
+<p>{{total_Number_of_Iterms}}</P
+<br>
+<br>
+<table>
+<thead>
+<tr>
+<th>Item Name:</th>
+<th>Date Created:</th>
+<th>Expiry Date:</th>
+<th>Action:</th>
+</tr>
+<thead>
+<tbody>
+
+{% for i in db_objects %}
+<tr>
+<td>{{i.item_name}}</td>
+<td>{{i.Date_arrived}}</td>
+<td>{{i.expiry_date}}</td>
+<td>
+<a href="{% url 'delete-stock' i.id %}" class="btn">Delete</a> 
+<a href="{% url 'update-stock' i.id %}" class="btn-update">Update</a>
+</td>
+<tr>
+{% endfor %}
+
+<tbody>
+</table>
+<br><br>
+
+<form method="POST" action="">
+    {% csrf_token %}
+    {{form.as_p}}
+    <button type="submit">Submit</button>
+</form>
+</body>
+</html>
