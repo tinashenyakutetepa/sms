@@ -6,6 +6,18 @@ from stock.models import Stock
 from .serializers import StockSerializer
 
 @api_view(['GET'])
+def apiOverview(request):
+	api_urls = {
+		'List':'/api/stock-list/',
+		'Detail View':'/api/stock-detail/id/',
+		'Create':'/api/create-stock/',
+		'Update':'/api/update-stock/id/',
+		'Delete':'/api/delete-stock/id/',
+		}
+
+	return Response(api_urls)
+
+@api_view(['GET'])
 def stockList_api(request):
 	stockList = Stock.objects.all().order_by('-id')
 	serializer = StockSerializer(stockList, many=True)
